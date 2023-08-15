@@ -4,6 +4,8 @@ https://algs4.cs.princeton.edu/home/
 # Chapter 1
 ## 1.1 基础编程模型
 
+<br><br><br>
+
 ### 1.1.1 Java程序基本结构
 1. execute a java code
 ```bash
@@ -11,6 +13,7 @@ https://algs4.cs.princeton.edu/home/
 (2) java BinarySearch
 ```
 
+<br><br><br>
 
 ### 1.1.2 primitive type
 - int
@@ -30,12 +33,17 @@ https://algs4.cs.princeton.edu/home/
 - byte -> 2^8
 - float -> 2^32
 
+
+<br><br><br>
+
 ### 1.1.3 statement
 - declaration
 - assign
 - condition
 - loop
 - break and continue
+
+<br><br><br>
 
 ### 1.1.4 简便记法
 - 单语句代码段
@@ -52,6 +60,8 @@ while(‹boolean expression›){
     <increment>;
 }
 ```
+
+<br><br><br>
 
 ### 1.1.5 数组
 
@@ -94,6 +104,7 @@ int[] b = a
 b[i]=5678
 ```
 
+<br><br><br>
 
 ### 1.1.6 静态方法
 1. sqrt
@@ -144,4 +155,125 @@ public static double H (int N){
 Math.abs()
 ```
 
+<br><br><br>
 
+### 1.1.8 字符串
+字符串是由遗传字符(char)组成的。非primitive type
+
+
+#### 1.1.8.2 类型转换
+```java
+public class Integer
+    static    int parseInt(String s)
+    static String toString(int i)
+
+public class Double
+    static double parseDouble(String s)
+    static String toString(double x)
+```
+
+<br><br><br>
+
+### 1.1.9 输入输出
+![imgs](./imgs/Xnip2023-08-15_16-13-49.jpg)
+
+#### 1.1.9.1 命令和参数
+- javac   -> 编译java程序
+- java    -> 运行java程序
+- more    -> 打印文件内容
+
+#### 1.1.9.2 标准输出
+
+```java
+// 提示符           // 调用RandomSeq中的静态方法main()      // args[1]
+%       java        RandomSeq       5                   100.0           200.0
+    // 调用java                     // args[0]                          // args[2]
+```
+
+#### 1.1.9.3 格式化输出
+
+
+```java
+// d -> java整型10进制
+// f -> float
+// s -> string
+// 在 % 和转换代码之间可以加入一个整数来表示转换之后的值的宽度
+public class RandomSeq{
+    public static void main(String[] args){
+        // print N random number between (lo, hi)
+        int N = Integer.parseInt(args[0]);
+        double lo = Double.parseDouble(args[1]);
+        double hi = Double.parseDouble(args[2]);
+        for (int i = 0; i< N; i++){
+            double x = StdRandom.uniform(lo, hi);
+            StdOut.printf("%.2f\n", x);
+        }
+    }
+}
+
+System.out.printf("%14.3f\n", 3.111111);
+System.out.printf("%-14.3f\n", 3.111111);
+System.out.println(String.format("%14.2f\n", 2.311323));
+>>         3.111
+>>3.111         
+>>          2.31
+```
+
+- 格式化方法
+```bash
+数据类型        转换代码        举例                    格式化字符串举例                转换后输出的字符串
+int             d            512                        "%14d"                      "           512"
+                                                        "%-14d"                     "512           "
+double          f           1595.1680010754388          "%14.2f"                    "       1595.17"
+                                                        "%.7f"                      "1595.1680011"
+                e                                       "14.4e"                     "    1.5952e+03"
+string          s           "Hello, World"              "%14s"                      "  Hello, World"
+                                                        "%-14s"                     "Hello, World  "
+                                                        "%14.5s"                    "         Hello"
+```
+
+#### 1.1.9.4 标准输入
+
+```java
+public class Average{
+    public static void main(String[] args){
+        double sum = 0.0;
+        int cnt = 0;
+        while (!StdIn.isEmpty()){
+            sum += Stdin.readDouble();
+            cnt++;
+        }
+        double avg = sum / cnt;
+        StdOut.printf("Average is %.5f\n", avg);
+    }
+}
+```
+
+#### 1.1.9.5 重定向与管道
+- 简单的提示符，可以将它的标准输出重定向至一个文件。
+```bash
+$ java RandomSeq 1000 100.0 200.0 > data.txt
+
+```
+
+- 我们可以重定向标准输入以使StdIn从文件而不是终端
+```bash
+$ java Average < data.txt
+```
+
+
+- 结合起来叫管道
+    - 突破了输入输出流的长度限制
+    - RandomSeq向输出流的末尾添加一个一个字符串
+    - Average调用时，从输入流的开头删除了一个字符串
+```bash
+$ java RandomSeq 1000 100.0 200.0 | java Average
+```
+
+#### 1.1.9.6 基础文件的输入出处
+
+#### 1.1.9.7 标准绘图库（基本方法）
+#### 1.1.9.8 标准绘图库（控制方法）
+
+<br><br><br>
+### 1.1.10 二份查找
